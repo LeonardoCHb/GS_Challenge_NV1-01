@@ -36,17 +36,15 @@ app.put("/repositories/:id", (request, response) => {
 
     const repositoryIndex= repositories.findIndex(repository => repository.id === id)
 
-    console.log(repositoryIndex)
     
     if(repositoryIndex < 0){
       return response.status(400).json({ erro:"Repository not found!"})
     }
-
-    repositories[repositoryIndex].likes = likes
-
+    
+    
+    
     const repository = {id,title,url,techs,likes}
-
-    repositories[repositoryIndex]=repository
+    console.log(likes)
 
     return response.json(repository)
 });
