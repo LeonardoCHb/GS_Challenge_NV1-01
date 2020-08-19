@@ -31,22 +31,21 @@ app.post("/repositories", (request, response) => {
 });
 
 app.put("/repositories/:id", (request, response) => {
-    const { id, likes} = request.params
+    const { id } = request.params
     const {title, url, techs} = request.body
 
     const repositoryIndex= repositories.findIndex(repository => repository.id === id)
-
+    
     
     if(repositoryIndex < 0){
       return response.status(400).json({ erro:"Repository not found!"})
     }
+    repositories[repositoryIndex].title = title
+    repositories[repositoryIndex].url = url
+    repositories[repositoryIndex].techs = techs
     
-    
-    
-    const repository = {id,title,url,techs,likes}
-    console.log(likes)
 
-    return response.json(repository)
+    return response.json(repositories[repositoryIndex])
 });
 
 app.delete("/repositories/:id", (request, response) => {
